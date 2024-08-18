@@ -1,6 +1,7 @@
 package in.techcamp.issueapp6;
 
 import lombok.AllArgsConstructor;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,5 +25,11 @@ public class IssueController {
             return "error";
         }
         return "redirect:/";
+    }
+    @GetMapping
+    public String showIssues(Model model){
+        var issueList = issueRepository.findAll();
+        model.addAttribute("issueList",issueList);
+        return "index";
     }
 }
